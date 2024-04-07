@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Slideshow</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: antiquewhite;
+      }
+      .slideshow{
+        max-width: 800px;
+        position: relative;
+        border: 5px solid brown;
+      }
+      .slideshow img {
+        width: 100%;
+        height: auto;
+      }
+      .prev,
+      .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        transition: 3s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+      }
+      .prev:hover,
+      .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      .prev img,
+      .next img {
+        width: 50px;
+        height: 50px;
+      }
+      .prev {
+        left: 0;
+        transform: translateY(-50%);
+      }
+      .next {
+        right: 0;
+        transform: translateY(-50%);
+      }
+      .caption-container {
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 10px 20px;
+        color: white;
+      }
+      .caption-container p {
+        margin: 0;
+        font-size: 14px;
+        padding: 2px 0;
+      }
+      .numbertext {
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+      }
+      .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 3s ease;
+      }
+      .slideshow{
+        border-radius: 30px;
+      }
+      img {
+        border-radius: 50px;
+        height: fit-content;
+        
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slideshow">
+      <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img src="photo-1504505278590-428d1acd0f07.avif" style="width: 100%" />
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img src="photo-1540324155974-7523202daa3f.avif" style="width: 100%" />
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img src="photo-1541904845547-0eaf866de232.avif" style="width: 100%" />
+      </div>
+
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <br />
+
+    <div style="text-align: center">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+    <script>
+      let slideIndex = 1;
+      showSlides(slideIndex);
+
+      function plusSlides(n) {
+        showSlides((slideIndex += n));
+      }
+
+      function currentSlide(n) {
+        showSlides((slideIndex = n));
+      }
+
+      function showSlides(n) {
+        let i;
+        const slides = document.getElementsByClassName("mySlides");
+        const dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {
+          slideIndex = 1;
+        }
+        if (n < 1) {
+          slideIndex = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+      }
+
+      let slideTimer;
+
+      function startSlideShow() {
+        slideTimer = setInterval(function () {
+          plusSlides(1);
+        }, 2000);
+      }
+
+      function stopSlideShow() {
+        clearInterval(slideTimer);
+      }
+
+      startSlideShow();
+    </script>
+  </body>
+</html>
